@@ -25,6 +25,7 @@ class Search extends React.Component {
             this.setState({
                 books
             })
+            console.log(books);
         });      
     }
 
