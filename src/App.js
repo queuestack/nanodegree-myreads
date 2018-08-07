@@ -17,7 +17,7 @@ class BooksApp extends React.Component {
         books: state.books.filter(b => b.id !== book.id).concat([book])
       }));
 
-      update(book, shelf);
+      console.log(update(book, shelf));
   }
 
   componentDidMount() {
@@ -41,7 +41,7 @@ class BooksApp extends React.Component {
               return (
                 <Home 
                   books={this.state.books}
-                  handleShelfChange={this.state.handleShelfChange}
+                  handleShelfChange={this.handleShelfChange}
                 />
               )
             }
@@ -49,7 +49,16 @@ class BooksApp extends React.Component {
         />
         <Route
           path='/search'
-          component={Search}
+          render={
+            ()=>{
+              return (
+                <Search
+                  books={this.state.books}
+                  handleShelfChange={this.handleShelfChange}
+                />
+              )
+            }
+          }
         />
       </div>
     )

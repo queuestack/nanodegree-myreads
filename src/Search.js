@@ -1,9 +1,14 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import SearchBar from './SearchBar'
 import SearchResult from './SearchResult'
 import { search } from './BooksAPI'
 
 class Search extends React.Component {
+    static propTypes = {
+        books: PropTypes.object,
+        handleShelfChange: PropTypes.func
+    }    
     state = {
         query: '',
         books: []
@@ -38,6 +43,7 @@ class Search extends React.Component {
                 />
                 <SearchResult 
                     books={this.state.books}
+                    handleShelfChange={this.props.handleShelfChange}
                 />
             </div>    
         )    

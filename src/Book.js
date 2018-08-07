@@ -1,10 +1,10 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
 
-const READING = 'Currently Reading';
-const TOREAD = 'Want to Read';
-const READ = 'Read';
-const NONE = 'None';
+const READING = 'currentlyReading';
+const TOREAD = 'wantToRead';
+const READ = 'read';
+const NONE = 'none';
 
 class Book extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class Book extends React.Component {
 
     static propTypes = {
         book: PropTypes.object,
-        handleShelfChnage: PropTypes.func
+        handleShelfChange: PropTypes.func
     }
 
     state = {
@@ -23,20 +23,15 @@ class Book extends React.Component {
     }
 
     handleChange(book, event) {
-        const READING_SHELF = "currentlyReading";
-        const TOREAD_SHELF = "wantToRead";
-        const READ_SHELF = "read";
-        let shelf;
+        const shelf = event.target.value;
+
+        console.log(book.shelf);
 
         this.setState({
             currentReadState: event.target.value
         });
 
-        if(event.target.value === READING) shelf = READING_SHELF;
-        if(event.target.value === TOREAD) shelf = TOREAD_SHELF;
-        if(event.target.value === READ) shelf = READ_SHELF;
-
-        this.props.handleShelfChnage(book, shelf);
+        this.props.handleShelfChange(book, shelf);
     }
 
     render() {
@@ -55,7 +50,7 @@ class Book extends React.Component {
                     <div className="book-shelf-changer">
                     <select
                         onChange={(event) => {this.handleChange(this.props.book, event)}}
-                        value={this.state.currentReadState}
+                        value={this.props.book.shelf}
                     >
                         <option value="move" disabled>Move to...</option>
                         {options.map((option) => {

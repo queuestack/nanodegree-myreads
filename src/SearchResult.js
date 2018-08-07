@@ -4,7 +4,8 @@ import Book from './Book'
 
 class SearchResult extends React.Component {    
     static propTypes = {
-        books: PropTypes.arrayOf(PropTypes.object)
+        books: PropTypes.arrayOf(PropTypes.object),
+        handleShelfChange: PropTypes.func
     }    
 
     render() {
@@ -18,6 +19,7 @@ class SearchResult extends React.Component {
                                 <Book
                                     key={book.industryIdentifiers[0].identifier}
                                     book={book}
+                                    handleShelfChange={this.props.handleShelfChange}
                                 />
                             )
                         })
