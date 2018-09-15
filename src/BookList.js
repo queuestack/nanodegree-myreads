@@ -9,6 +9,8 @@ class BookList extends React.Component {
     }
 
     render() {
+        const { handleShelfChange } = this.props;
+
         const READING_SHELF = 'currentlyReading';
         const TOREAD_SHELF = 'wantToRead';
         const READ_SHELF = 'read';
@@ -29,17 +31,17 @@ class BookList extends React.Component {
                     <BookShelf 
                         bookshelfType="Currently Reading"
                         books={readingBooks}
-                        handleShelfChange={this.props.handleShelfChange}
+                        handleShelfChange={handleShelfChange}
                     />
                     <BookShelf
                         bookshelfType="Want to Read"
                         books={toReadBooks}
-                        handleShelfChange={this.props.handleShelfChange}
+                        handleShelfChange={handleShelfChange}
                     />
                     <BookShelf
                         bookshelfType="Read"
                         books={readBooks}
-                        handleShelfChange={this.props.handleShelfChange}
+                        handleShelfChange={handleShelfChange}
                     />
                 </div>
             </div>            

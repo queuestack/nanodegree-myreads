@@ -10,14 +10,17 @@ class Home extends React.Component {
     }
 
     render() {
+        const { books, handleShelfChange } = this.props;
+        console.log(books);
+
         return (
             <div className="list-books">
                 <div className="list-books-title">
                 <h1>MyReads</h1>
                 </div>
                 <BookList 
-                    books={this.props.books}
-                    handleShelfChange={this.props.handleShelfChange}
+                    books={books}
+                    handleShelfChange={handleShelfChange}
                 />
                 <div className="open-search">
                     <Link to="/search">Add a book</Link>

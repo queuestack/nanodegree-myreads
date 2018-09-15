@@ -36,6 +36,7 @@ class Book extends React.Component {
 
     render() {
         const options = [READING, TOREAD, READ, NONE];
+        console.log(this.props.book.shelf);
 
         return (
             <li>

@@ -17,13 +17,12 @@ class BooksApp extends React.Component {
         books: state.books.filter(b => b.id !== book.id).concat([book])
       }));
 
-      console.log(update(book, shelf));
+      update(book, shelf);
   }
 
   componentDidMount() {
       getAll().then(
           (books) => {
-              console.log(this.state.books)
               this.setState({
                   books
               })

@@ -6,12 +6,13 @@ import { search } from './BooksAPI'
 
 class Search extends React.Component {
     static propTypes = {
-        books: PropTypes.object,
+        books: PropTypes.array,
         handleShelfChange: PropTypes.func
     }    
+    
     state = {
         query: '',
-        books: []
+        searchedBooks: []
     }
 
     handleChange = (event) => {
@@ -26,11 +27,23 @@ class Search extends React.Component {
     }
 
     fetchBooks = (query) => {
-        search(query, 20).then((books) => {
+        search(query, 20).then((searchedBooks) => { 
+            if (!searchedBooks || searchedBooks.error) {
+                this.setState({searchedBooks: []});
+                return;
+            }
+
+            searchedBooks = searchedBooks.map(searchedBook => {
+                const bookInShelf = this.props.books.find(book => book.id === searchedBook.id);
+                searchedBook.shelf = bookInShelf ? bookInShelf.shelf : 'none';
+                return searchedBook;
+            });
+
+            console.log(searchedBooks);
+
             this.setState({
-                books
-            })
-            console.log(books);
+                searchedBooks
+            });
         });      
     }
 
@@ -42,7 +55,7 @@ class Search extends React.Component {
                     handleChange={this.handleChange}
                 />
                 <SearchResult 
-                    books={this.state.books}
+                    books={this.state.searchedBooks}
                     handleShelfChange={this.props.handleShelfChange}
                 />
             </div>    
